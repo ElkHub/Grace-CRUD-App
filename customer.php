@@ -9,22 +9,14 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
-   <!-- <style>
-        .error-message {
-            color: red;
-        }
-    </style> -->
 </head>
 <body>
 
 <?php
 
-// Initialize variables to store form data and error messages
 $name = $email = $password = $gender = $medicine = '';
 $nameErr = $emailErr = $passwordErr = $genderErr = $medicineErr = '';
-      // Check if the form was submitted
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Get the form data
         $name = $_POST['name'];
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -32,8 +24,7 @@ $nameErr = $emailErr = $passwordErr = $genderErr = $medicineErr = '';
         $medicine = $_POST['medicine'];
 
 
-      // Validate form fields
-    if (empty($name)) {
+  if (empty($name)) {
       $nameErr = 'Name is required.';
   }
   if (empty($email)) {
@@ -51,17 +42,16 @@ $nameErr = $emailErr = $passwordErr = $genderErr = $medicineErr = '';
       $medicineErr = 'Medicine is required.';
   }
   $email = strtolower($email);
-    // If all fields are filled and password length is valid, proceed to database insertion
+ 
     if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($genderErr) && empty($medicineErr)) {
 
-        // Connect to the database
         $connection = mysqli_connect('localhost', 'root', '', 'mypcot_db');
 
         if ($connection->connect_error) {
           die("Connection failed: " . $connection->connect_error);
         } else {
 
-          // Insert the user data into the database
+
           $sql = "INSERT INTO customer (name, email, password, gender, medicine) VALUES ('$name', '$email', '$password', '$gender', '$medicine')";
 
           if ($connection->query($sql) === TRUE) {
@@ -77,7 +67,7 @@ $nameErr = $emailErr = $passwordErr = $genderErr = $medicineErr = '';
       }
     ?>
    
-<!-- header section starts  -->
+
 
 <section class="header">
 
