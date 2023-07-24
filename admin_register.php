@@ -3,15 +3,12 @@
   <head>
     <meta charset="UTF-8">
     <title>Register</title>
-     <!-- swiper css link  -->
-   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-
 <!-- font awesome cdn link  -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <!-- custom css file link  -->
 <link rel="stylesheet" href="css/style.css">
-    <style>
+<style>
        *,
 *:before,
 *:after{
@@ -117,15 +114,12 @@ button{
   </head>
   <body>
   <?php
-      // Check if the form was submitted
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Get the form data
         $username = $_POST['username'];
         $name = $_POST['name'];
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        // Connect to the database
         $connection = mysqli_connect('localhost', 'root', '', 'mypcot_db');
 
         if ($connection->connect_error) {
@@ -133,7 +127,6 @@ button{
         } else {
           $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-          // Insert the user data into the database
           $sql = "INSERT INTO admin_register (username, name, email, password) VALUES ('$username', '$name', '$email', '$hashed_password')";
 
           if ($connection->query($sql) === TRUE) {
