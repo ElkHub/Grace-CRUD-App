@@ -168,31 +168,26 @@ button{
       </form>
     
       <?php
-// Check if the form was submitted
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  // Get the form data
   $username = $_POST['username'];
   $password = $_POST['password'];
   
-  // Connect to the database
+
   $connection = mysqli_connect('localhost','root','','mypcot_db');
   
   if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
   }
   
-  // Hash the password entered by the user
   $hashed_password = password_hash($password, PASSWORD_DEFAULT);
   
-  // Retrieve the user data from the database
   $sql = "SELECT * FROM admin_register WHERE username='$username'";
   $result = $connection->query($sql);
   
   if ($result->num_rows > 0) {
-    // User is registered
     $row = $result->fetch_assoc();
     if (password_verify($password, $row['password'])) {
-      // Password is correct
       session_start();
       $_SESSION['logged_in'] = true;
       $_SESSION['username'] = $username;
@@ -200,11 +195,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       header("Location: home.php");
       exit;
     } else {
-      // Password is incorrect
       echo '<div class="banner">Incorrect password.</div>';
     }
   } else {
-    // User is not registered
     echo '<div class="banner">Username not found.</div>';
   }
   
